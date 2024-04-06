@@ -1,18 +1,20 @@
+//@ts-nocheck
 import { useState } from "react";
-import "../App.css";
 
 const Sform = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailList, setEmailList] = useState([]);
-  const [passwordList, setPasswordList] = useState([]);
+  const [name, setName] = useState("");
+  const [list, setList] = useState([]);
 
-  const handleSubmit = (e) => {
-    console.log(email, password);
-    const data = { email, password };
+  const handleSubmit = () => {
+    console.log(name, email, password);
+    console.log(list);
+    alert("Thank You For Signing " + name);
+    const data = { email, password, name };
     if (email && password) {
-      setEmailList(email);
-      setPasswordList(password);
+      setList((ls) => [...ls, data]);
+      setName("");
       setEmail("");
       setPassword("");
     }
@@ -25,6 +27,24 @@ const Sform = () => {
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Sign in to our plathtmlForm
           </h5>
+          <div>
+            <label
+              htmlFor="name"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Name
+            </label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              name="name"
+              id="name"
+              placeholder="e.g. John"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              required
+            />
+          </div>
           <div>
             <label
               htmlFor="email"
